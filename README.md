@@ -1,8 +1,8 @@
-# notification_app_fe
+# CampusNotify (Frontend)
 
-Campus Notifications Platform — Frontend (Next.js + Material UI)
+This is the frontend for a simple campus notifications app built with Next.js and Material UI. It shows a feed of notifications and a priority inbox that surfaces the most important items first.
 
-## Setup
+Quick start
 
 ```bash
 cd notification_app_fe
@@ -10,28 +10,24 @@ npm install
 npm run dev
 ```
 
-App runs on **http://localhost:3000**
+Open http://localhost:3000 in your browser.
 
-## Pages
+What you'll find
 
-| Route | Description |
-|-------|-------------|
-| `/` | All notifications — filter by type, pagination, new/read state |
-| `/priority` | Priority inbox — top N notifications by weight × recency |
+- `/` — All notifications: browse, filter by type, and mark as viewed.
+- `/priority` — Priority inbox: shows the top N notifications by importance and recency.
 
-## Auth
+Authentication
 
-Authentication is handled in code. The app restores a saved session token when one exists and otherwise attempts the notification fetch flow directly, so there is no separate login page in the UI.
+The app uses a session token stored in the browser (sessionStorage). If a valid token is present the app will use it; otherwise you'll see the login form to obtain a token.
 
-## Logging
+Logging
 
-All events are logged via `logging_middleware/logger.ts` → POST to the test server log API.
-No `console.log` is used anywhere in the application.
+Client-side events are sent to the logging endpoint using the `logging_middleware` module.
 
-## Priority Formula
+Priority scoring (brief)
 
-```
-score = typeWeight × (1 / secondsSinceTimestamp)
+Higher weight means higher priority: Placement > Result > Event.
 
-Placement = 3, Result = 2, Event = 1
-```
+If you want a deeper description (how priority is computed, API details, or deployment steps) tell me and I'll expand this file.
+
